@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ListView deviceView;
     BltDeviceAdapter bltDeviceAdapter;
     ArrayList<BluetoothDevice> discoveredDevices;
+    static final BluetoothAdapter bltAdapter = BluetoothAdapter.getDefaultAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         deviceView = (ListView) findViewById(R.id.deviceView);
         bltDeviceAdapter = new BltDeviceAdapter(this, discoveredDevices);
         deviceView.setAdapter(bltDeviceAdapter);
+        deviceView.setOnItemClickListener(new bltDeviceClickListener(bltAdapter));
 
         /*Initialize bluetooth*/
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
-        final BluetoothAdapter bltAdapter = BluetoothAdapter.getDefaultAdapter();
         if(bltAdapter == null){
             //Le bluetooth n'est pas supporté
             Intent closeIntent = new Intent(Intent.ACTION_MAIN);
@@ -50,13 +51,15 @@ public class MainActivity extends AppCompatActivity {
             startActivity(closeIntent);
         }
         if(!bltAdapter.isEnabled()){
-            //Le bluetooth n'est pas supporté
+            //Le bluetooth n'est pas allumé
             Intent enableBltIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBltIntent, 1);
+        }else{
+            listBltDevice(bltAdapter);
         }
+    }
 
-        deviceView.setOnItemClickListener(new bltDeviceClickListener(bltAdapter));
-
+    public void listBltDevice(BluetoothAdapter bltAdapter){
         /*Check for paired devices*/
         Set<BluetoothDevice> pairedDevices = bltAdapter.getBondedDevices();
         if(pairedDevices.size() > 0){
@@ -85,8 +88,12 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(brcReceiver, intFilter);
         bltAdapter.startDiscovery();
         //TODO unregister
+    }
 
-
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        if(requestCode == 1 && resultCode == -1){
+            listBltDevice(bltAdapter);
+        }
     }
 
     /*Pairing bluetooth*/
