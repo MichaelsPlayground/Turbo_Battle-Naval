@@ -3,8 +3,6 @@ package com.example.networkapp;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,20 +14,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.UUID;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
     ListView deviceView;
     BltDeviceAdapter bltDeviceAdapter;
     ArrayList<BluetoothDevice> discoveredDevices;
-    static final BluetoothAdapter bltAdapter = BluetoothAdapter.getDefaultAdapter();
+    private static final BluetoothAdapter bltAdapter = BluetoothAdapter.getDefaultAdapter();
+
+    Button btConnect;
+    Button btSend;
+
+    BltConnectionService bltConnectionService;
+    BluetoothDevice bltDevice;
+    private UUID uuid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
         bltDeviceAdapter = new BltDeviceAdapter(this, discoveredDevices);
         deviceView.setAdapter(bltDeviceAdapter);
         deviceView.setOnItemClickListener(new bltDeviceClickListener(bltAdapter));
+
+        btConnect = (Button) findViewById(R.id.btConnect);
+        btSend = (Button) findViewById(R.id.btSend);
+        btConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startBltConnection(bltDevice, uuid);
+            }
+        });
+        btSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bltConnectionService.write();
+            }
+        });
+
+        uuid = UUID.fromString(MainActivity.this.getString(R.string.uuid));
 
         /*Initialize bluetooth*/
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},1);
@@ -69,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /*Discover bluetooth*/
-        BroadcastReceiver brcReceiver = new BroadcastReceiver() {
+        final BroadcastReceiver brcReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
@@ -80,20 +100,31 @@ public class MainActivity extends AppCompatActivity {
                         discoveredDevices.add(newDevice);
                         bltDeviceAdapter.notifyDataSetChanged();
                     }
+                }else if(BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)){
+                    Log.d("bond state", "from " + intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, 0) + " to " + intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0));
+                    if(intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, 0) == 12){
+                        bltDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                    }
                 }
             }
         };
 
         IntentFilter intFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        intFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(brcReceiver, intFilter);
         bltAdapter.startDiscovery();
-        //TODO unregister
+        //TODO
+        //unregisterReceiver(brcReceiver);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         if(requestCode == 1 && resultCode == -1){
             listBltDevice(bltAdapter);
         }
+    }
+
+    public void startBltConnection(BluetoothDevice device, UUID uuid){
+        bltConnectionService.startClient(device, uuid);
     }
 
     /*Pairing bluetooth*/
@@ -110,7 +141,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Item clicked", discoveredDevices.get(position).getName());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 discoveredDevices.get(position).createBond();
+                bltDevice = discoveredDevices.get(position);
+                bltConnectionService = new BltConnectionService(getApplicationContext(), bltAdapter);
             }
         }
     }
+
 }
