@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button btConnect;
     Button btSend;
 
-    BltConnectionService bltConnectionService;
+    public static BltConnectionService bltConnectionService;
     BluetoothDevice bltDevice;
     private UUID uuid;
 
@@ -67,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bltConnectionService.write();
+                Intent intent = new Intent(MainActivity.this, BattleNavalActivity.class);
+                startActivity(intent);
             }
         });
 
