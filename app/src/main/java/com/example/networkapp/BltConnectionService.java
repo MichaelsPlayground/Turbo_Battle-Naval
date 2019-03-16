@@ -5,6 +5,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import java.io.IOException;
@@ -30,12 +32,15 @@ public class BltConnectionService {
         this.bltAdapter = bltAdapter;
         appName = context.getString(R.string.app_name);
         uuid = UUID.fromString(context.getString(R.string.uuid));
+        //Initialize server
         start();
     }
 
+    //Server initialization
     private class AcceptThread extends Thread{
         private final BluetoothServerSocket serverSocket;
 
+        //Create a server socket
         public AcceptThread(){
             BluetoothServerSocket temp = null;
 
@@ -49,6 +54,7 @@ public class BltConnectionService {
             serverSocket = temp;
         }
 
+        //Wait until the server socket is used
         public void run(){
             BluetoothSocket bltSocket = null;
 
@@ -63,6 +69,9 @@ public class BltConnectionService {
             if(bltSocket != null){
                 connected(bltSocket, bltDevice);
             }
+
+            //Then delete it chen it becomes useless
+            cancel();
         }
 
         public void cancel(){
@@ -74,6 +83,7 @@ public class BltConnectionService {
         }
     }
 
+    //Client initialization
     private class ConnectThread extends Thread{
         private BluetoothSocket bltSocket;
 
@@ -85,6 +95,7 @@ public class BltConnectionService {
         public void run(){
             BluetoothSocket temp = null;
 
+            //Create a client socket
             try {
                 temp = bltDevice.createRfcommSocketToServiceRecord(deviceUUID);
                 Log.d("ConnectThread", "socket creation success");
@@ -96,6 +107,7 @@ public class BltConnectionService {
 
             bltAdapter.cancelDiscovery();
 
+            //Attempt a connection with the distant server socket
             try {
                 bltSocket.connect();
                 Log.d("ConnectThread", "connection success");
@@ -120,16 +132,19 @@ public class BltConnectionService {
         }
     }
 
+    //Manage connection
     private class ConnectedThread extends Thread {
         private final BluetoothSocket bltSocket;
         private final InputStream inptStream;
         private final OutputStream outptStream;
+        private final LocalBroadcastManager locBroadcastManager = LocalBroadcastManager.getInstance(context);
 
         public ConnectedThread(BluetoothSocket socket){
             bltSocket = socket;
             InputStream inStream = null;
             OutputStream outStream = null;
 
+            //Initialize connection management
             try {
                 inStream = bltSocket.getInputStream();
                 outStream = bltSocket.getOutputStream();
@@ -149,6 +164,9 @@ public class BltConnectionService {
                 try{
                     bytes = inptStream.read(buffer);
                     Log.d("Message received", new String(buffer, 0, bytes));
+                    Intent intent= new Intent("REQUEST");
+                    intent.putExtra("RequestValue",new String(buffer, 0, bytes));
+                    locBroadcastManager.sendBroadcast(intent);
                 }catch (IOException e){
                     Log.e("ConnectedThread","reading failure", e);
                     break;
@@ -156,8 +174,8 @@ public class BltConnectionService {
             }
         }
 
-        public void write(){
-            String text = "test";
+        //Send request to the distant server
+        public void write(String text){
             try {
                 outptStream.write(text.getBytes());
             } catch (IOException e) {
@@ -195,7 +213,7 @@ public class BltConnectionService {
         connectedThread.start();
     }
 
-    public void write(){
-        connectedThread.write();
+    public void write(String text){
+        connectedThread.write(text);
     }
 }
