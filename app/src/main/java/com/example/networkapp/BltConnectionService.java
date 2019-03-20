@@ -8,6 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Gravity;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,11 +29,14 @@ public class BltConnectionService {
     private UUID deviceUUID;
     private ConnectedThread connectedThread;
 
+    public boolean isConnected;
+
     public BltConnectionService(Context context, BluetoothAdapter bltAdapter){
         this.context = context;
         this.bltAdapter = bltAdapter;
         appName = context.getString(R.string.app_name);
         uuid = UUID.fromString(context.getString(R.string.uuid));
+        isConnected = false;
         //Initialize server
         start();
     }
@@ -61,6 +66,9 @@ public class BltConnectionService {
             try{
                 Log.d("AcceptThread run", "running");
                 bltSocket = serverSocket.accept();
+                Toast toast = Toast.makeText(context, "Vous êtes connectés !", Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,10);
+                toast.show();
                 Log.d("AcceptThread run", "Connection success");
             } catch (IOException e) {
                 Log.e("AcceptThread run", "Connection failure", e);
@@ -111,6 +119,7 @@ public class BltConnectionService {
             try {
                 bltSocket.connect();
                 Log.d("ConnectThread", "connection success");
+                connected(bltSocket, bltDevice);
             } catch (IOException e) {
                 try {
                     bltSocket.close();
@@ -119,8 +128,6 @@ public class BltConnectionService {
                 }
                 Log.e("ConnectThread", "connection failure", e);
             }
-
-            connected(bltSocket, bltDevice);
         }
 
         public void cancel(){
@@ -140,6 +147,8 @@ public class BltConnectionService {
         private final LocalBroadcastManager locBroadcastManager = LocalBroadcastManager.getInstance(context);
 
         public ConnectedThread(BluetoothSocket socket){
+            isConnected = true;
+
             bltSocket = socket;
             InputStream inStream = null;
             OutputStream outStream = null;

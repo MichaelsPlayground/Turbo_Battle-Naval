@@ -1,0 +1,1120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="Placement des navires"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/porteAvion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="spa"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/croiseur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sc"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sousMarin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="ssm"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/torpilleur"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="st"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TableLayout
+
+            android:id="@+id/plat2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:stretchColumns="0,1,2,3,4,5,6,7">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH1"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH2"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH3"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH4"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH6"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH7"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:background="#000000">
+
+                <TextView
+                    android:id="@+id/AllyA8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="0"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyA8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyB8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="1"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyB8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyC8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="2"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyC8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyD8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="3"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyD8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyE8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="4"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyE8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyF8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="5"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyF8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyG8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_column="6"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyG8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/AllyH8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_column="7"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/holo_blue_dark"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="place"
+                    android:tag="AllyH8"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textStyle="bold" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="reset"
+                android:text="RESET" />
+
+            <Button
+                android:id="@+id/validate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:onClick="validate"
+                android:text="VALIDER" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

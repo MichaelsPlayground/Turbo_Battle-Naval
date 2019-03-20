@@ -12,10 +12,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -57,18 +59,27 @@ public class MainActivity extends AppCompatActivity {
         //Initialize Button
         btConnect = (Button) findViewById(R.id.btConnect);
         btSend = (Button) findViewById(R.id.btSend);
+        btConnect.setEnabled(false);
+        btSend.setEnabled(false);
         btConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("About to be connected",bltDevice.getName());
                 startBltConnection(bltDevice, uuid);
+                btConnect.setEnabled(false);
             }
         });
         btSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BattleNavalActivity.class);
-                startActivity(intent);
+                if(bltConnectionService.isConnected){
+                    Intent intent = new Intent(MainActivity.this, BattleNavalActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "Vous n'êtes pas encore connecté", Toast.LENGTH_LONG);
+                    toast.setGravity(Gravity.TOP, 0,10);
+                    toast.show();
+                }
             }
         });
 
@@ -142,8 +153,6 @@ public class MainActivity extends AppCompatActivity {
         intFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(brcReceiver, intFilter);
         bltAdapter.startDiscovery();
-
-        //TODO unregisterReceiver(brcReceiver);
     }
 
     public void startBltConnection(BluetoothDevice device, UUID uuid){
@@ -178,9 +187,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            bltAdapter.cancelDiscovery();
-            bltDevice = pairedDevices.get(position);
-            bltConnectionService = new BltConnectionService(getApplicationContext(), bltAdapter);
+            if(!btConnect.isEnabled()){
+                bltAdapter.cancelDiscovery();
+                bltDevice = pairedDevices.get(position);
+                bltConnectionService = new BltConnectionService(getApplicationContext(), bltAdapter);
+                btConnect.setEnabled(true);
+                btSend.setEnabled(true);
+                Toast toast = Toast.makeText(getApplicationContext(), "Vous allez jouer avec " + bltDevice.getName(), Toast.LENGTH_LONG);
+                toast.setGravity(Gravity.TOP, 0,10);
+                toast.show();
+            }
         }
     }
 }

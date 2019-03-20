@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,8 +31,7 @@ public class BattleNavalActivity extends AppCompatActivity {
             }
         };
 
-        IntentFilter intentFilter = new IntentFilter("REQUEST");
-        registerReceiver(brcReceiver, intentFilter);
+        LocalBroadcastManager.getInstance(this).registerReceiver(brcReceiver, new IntentFilter("REQUEST"));
     }
 
     public void attack(View view){
