@@ -1,4 +1,30 @@
 <resources>
-    <string name="app_name">NetworkApp</string>
-    <string name="uuid">d4c205d2-8775-42cd-8c96-4fabd9066619</string>
+    <string name="app_name">Turbo Naval-Battle</string>
+    <string name="uuid" translatable="false">d4c205d2-8775-42cd-8c96-4fabd9066619</string>
+    <string name="pairedList">Paired devices</string>
+    <string name="tutoDevice">Pick a partner to play with !</string>
+    <string name="discoveredDevices">Discovered devices</string>
+    <string name="modeLocal">Start playing !</string>
+    <string name="suddenEnd">Opponent left the game !</string>
+    <string name="miss">Miss</string>
+    <string name="hit">Hit !</string>
+    <string name="turn">You can attack</string>
+    <string name="hitnsunk">Hit and sunk !</string>
+    <string name="congrat">Congratulation !</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="abandon">Do you really want to give up ?</string>
+    <string name="revenge">Well tried ! Do you want to get a revenge ?</string>
+    <string name="opponentLeft">Your opponent gave up</string>
+    <string name="win">Well played ! Do you want to smash your opponent one more time ?</string>
+    <string name="missingShip">You don\'t have placed all your ships !</string>
+    <string name="len">%1$s : %2$d       --       Length %3$d</string>
+    <string name="aircraft">Aircraft-carrier</string>
+    <string name="submarine">Submarine</string>
+    <string name="torpedo">Torpedo-boat</string>
+    <string name="cruiser">Cruiser</string>
+    <string name="shipPlace">Ships placement</string>
+    <string name="reset">Reset</string>
+    <string name="validate">Validate</string>
+    <string name="playWith">"You are about to play with "</string>
 </resources>

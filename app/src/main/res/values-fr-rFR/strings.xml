@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Turbo Bataille-Navale</string>
+    <string name="pairedList">Appareils appairés</string>
+    <string name="tutoDevice">Choisis quelqu\'un avec qui jouer !</string>
+    <string name="discoveredDevices">Appareils découverts</string>
+    <string name="modeLocal">Commencer à jouer !</string>
+    <string name="suddenEnd">L\'adversaire a quitté la partie !</string>
+    <string name="miss">Dans l\'eau</string>
+    <string name="hit">Touché !</string>
+    <string name="turn">Vous pouvez attaquer</string>
+    <string name="hitnsunk">Touché coulé !</string>
+    <string name="congrat">Félicitation !</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="abandon">Voulez-vous vraiment abandonner ?</string>
+    <string name="revenge">Bien tenté ? Voulez-vous une revanche ?</string>
+    <string name="opponentLeft">Votre adversaire a abandonné</string>
+    <string name="win">Bien joué ! Voulez-vous écraser votre adversaire une nouvelle fois ?</string>
+    <string name="missingShip">Vous n\'avez pas placé tous vos navires !</string>
+    <string name="len">%1$s : %2$d       --       Longueur %3$d</string>
+    <string name="aircraft">Porte-avions</string>
+    <string name="submarine">Sous-marin</string>
+    <string name="torpedo">Torpilleur</string>
+    <string name="cruiser">Croiseur</string>
+    <string name="shipPlace">Placement des navires</string>
+    <string name="reset">Recommencer</string>
+    <string name="validate">Valider</string>
+    <string name="playWith">"Vous allez jouer avec "</string>
+</resources>

@@ -14,18 +14,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Discovered devices" />
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
+            android:gravity="center"
+            android:text="@string/tutoDevice"
+            android:textSize="24sp" />
 
-        <ListView
-            android:id="@+id/discoveredView"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="2dp"
+            android:background="@color/justDark" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Paired devices" />
+            android:layout_marginLeft="5sp"
+            android:text="@string/pairedList" />
 
         <ListView
             android:id="@+id/pairedView"
@@ -33,25 +37,24 @@
             android:layout_height="0dp"
             android:layout_weight="0.9" />
 
-        <LinearLayout
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/justDark" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="5sp"
+            android:text="@string/discoveredDevices" />
 
-            <Button
-                android:id="@+id/btConnect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Connect" />
+        <ListView
+            android:id="@+id/discoveredView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.75" />
 
-            <Button
-                android:id="@+id/btSend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Start Game" />
-        </LinearLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

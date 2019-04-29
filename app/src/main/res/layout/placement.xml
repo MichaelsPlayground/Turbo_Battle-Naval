@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             android:gravity="center"
-            android:text="Placement des navires"
+            android:text="@string/shipPlace"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
 
@@ -1103,7 +1103,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="reset"
-                android:text="RESET" />
+                android:text="@string/reset" />
 
             <Button
                 android:id="@+id/validate"
@@ -1112,7 +1112,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:onClick="validate"
-                android:text="VALIDER" />
+                android:text="@string/validate" />
         </LinearLayout>
 
 

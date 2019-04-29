@@ -1,11 +1,13 @@
 package com.example.networkapp;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,119 +25,95 @@ public class BltConnectionService {
     private final BluetoothAdapter bltAdapter;
 
     Context context;
-    private AcceptThread acceptThread;
-    private ConnectThread connectThread;
     private BluetoothDevice bltDevice;
     private UUID deviceUUID;
     private ConnectedThread connectedThread;
+    private ServThread servThread;
+    private boolean mode;
 
     public boolean isConnected;
 
-    public BltConnectionService(Context context, BluetoothAdapter bltAdapter){
+    public BltConnectionService(Context context, BluetoothAdapter bltAdapter, BluetoothDevice bltDevice){
         this.context = context;
         this.bltAdapter = bltAdapter;
+        this.bltDevice = bltDevice;
         appName = context.getString(R.string.app_name);
         uuid = UUID.fromString(context.getString(R.string.uuid));
+        mode = false;
         isConnected = false;
-        //Initialize server
-        start();
+        //Initialize mode
+        startMode();
     }
 
-    //Server initialization
-    private class AcceptThread extends Thread{
+    public void startMode(){
+        servThread = null;
+        connectedThread = null;
+
+        //Try to connect as client
+        BluetoothSocket bltSocket = null;
+
+        try {
+            BluetoothSocket temp = bltDevice.createRfcommSocketToServiceRecord(uuid);
+            Log.d("Phase startMode","temp client socket created");
+            bltSocket = temp;
+        } catch (IOException e){
+            Log.e("Phase startMode", "failed to create temp client socket", e);
+        }
+
+        bltAdapter.cancelDiscovery();
+
+        try {
+            bltSocket.connect();
+            Log.d("Phase startMode", "connection as client successful");
+            connected(bltSocket, bltDevice);
+        } catch (IOException e){
+            mode = true;
+            try {
+                bltSocket.close();
+            } catch (IOException e1) {
+                Log.e("Phase startMode", "close failure", e1);
+            }
+        }
+
+        //Try to serv
+        if(mode){
+            servThread = new ServThread();
+            servThread.start();
+        }
+    }
+
+    private class ServThread extends Thread {
         private final BluetoothServerSocket serverSocket;
 
-        //Create a server socket
-        public AcceptThread(){
+        public ServThread(){
             BluetoothServerSocket temp = null;
-
-            try{
+            try {
                 temp = bltAdapter.listenUsingInsecureRfcommWithServiceRecord(appName, uuid);
-                Log.d("Set up","success");
-            } catch (IOException e) {
-                Log.e("Set up","failure", e);
+                Log.d("Phase startMode", "temp server socket created");
+            } catch (IOException e){
+                Log.e("Phase startMode", "failed to create temp server socket", e);
             }
-
             serverSocket = temp;
         }
 
-        //Wait until the server socket is used
-        public void run(){
-            BluetoothSocket bltSocket = null;
+        @Override
+        public void run() {
+            BluetoothSocket ovSocket = null;
 
-            try{
-                Log.d("AcceptThread run", "running");
-                bltSocket = serverSocket.accept();
-                Toast toast = Toast.makeText(context, "Vous êtes connectés !", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 0,10);
-                toast.show();
-                Log.d("AcceptThread run", "Connection success");
-            } catch (IOException e) {
-                Log.e("AcceptThread run", "Connection failure", e);
-            }
-
-            if(bltSocket != null){
-                connected(bltSocket, bltDevice);
-            }
-
-            //Then delete it chen it becomes useless
-            cancel();
-        }
-
-        public void cancel(){
-            try{
-                serverSocket.close();
-            } catch (IOException e) {
-                Log.d("Close serverSocket", "Failure", e);
-            }
-        }
-    }
-
-    //Client initialization
-    private class ConnectThread extends Thread{
-        private BluetoothSocket bltSocket;
-
-        public ConnectThread(BluetoothDevice device, UUID uuid) {
-            bltDevice = device;
-            deviceUUID = uuid;
-        }
-
-        public void run(){
-            BluetoothSocket temp = null;
-
-            //Create a client socket
-            try {
-                temp = bltDevice.createRfcommSocketToServiceRecord(deviceUUID);
-                Log.d("ConnectThread", "socket creation success");
-            } catch (IOException e) {
-                Log.e("ConnectThread", "socket creation failure", e);
-            }
-
-            bltSocket = temp;
-
-            bltAdapter.cancelDiscovery();
-
-            //Attempt a connection with the distant server socket
-            try {
-                bltSocket.connect();
-                Log.d("ConnectThread", "connection success");
-                connected(bltSocket, bltDevice);
-            } catch (IOException e) {
+            if(serverSocket != null){
                 try {
-                    bltSocket.close();
-                } catch (IOException e1) {
-                    Log.e("ConnectThread", "close failure", e1);
+                    Log.d("Phase startMode", "Waiting for a connection");
+                    ovSocket = serverSocket.accept();
+                    Log.d("Phase startMode","Connection as server successful");
+                    connected(ovSocket, bltDevice);
+                } catch (IOException e1){
+                    Log.e("Phase startMode", "Failed to connect as server", e1);
                 }
-                Log.e("ConnectThread", "connection failure", e);
             }
         }
 
         public void cancel(){
-            try{
-                bltSocket.close();
-            } catch (IOException e) {
-                Log.e("ConnectThread", "close failure", e);
-            }
+
         }
     }
 
@@ -178,6 +156,9 @@ public class BltConnectionService {
                     locBroadcastManager.sendBroadcast(intent);
                 }catch (IOException e){
                     Log.e("ConnectedThread","reading failure", e);
+                    Intent intent= new Intent("REQUEST");
+                    intent.putExtra("RequestValue","suddenEnd");
+                    locBroadcastManager.sendBroadcast(intent);
                     break;
                 }
             }
@@ -199,22 +180,6 @@ public class BltConnectionService {
                 Log.e("ConnectedThread","close socket failure", e);
             }
         }
-    }
-
-    public synchronized void start(){
-        if(connectThread != null){
-            connectThread.cancel();
-            connectThread = null;
-        }
-        if(acceptThread == null){
-            acceptThread = new AcceptThread();
-            acceptThread.start();
-        }
-    }
-
-    public void startClient(BluetoothDevice device, UUID uuid){
-        connectThread = new ConnectThread(device, uuid);
-        connectThread.start();
     }
 
     private void connected(BluetoothSocket bltSocket, BluetoothDevice bltDevice){

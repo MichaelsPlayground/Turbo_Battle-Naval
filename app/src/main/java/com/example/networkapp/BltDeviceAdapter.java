@@ -40,7 +40,7 @@ public class BltDeviceAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = inflater.inflate(R.layout.blt_device, null);
         TextView bltName = (TextView) view.findViewById(R.id.bltName);
-        bltName.setText(bltList.get(position).getName() + " @ " + bltList.get(position).getAddress());
+        bltName.setText(bltList.get(position).getName());
         return view;
     }
 }

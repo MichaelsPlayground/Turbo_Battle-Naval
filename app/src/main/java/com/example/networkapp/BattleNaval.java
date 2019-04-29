@@ -22,7 +22,7 @@ public class BattleNaval extends Activity {
 
     BltConnectionService bcs;
 
-    enum navire{None,T,C,SM,PA}  //liste des navires existants, leur rang dans l'énumération correspond aussi à leur longueur
+    enum navire{None,T,C,SM,PA}  //List of playable ship, rank means ship's length
 
     char cases[]={'A','B','C','D','E','F','G','H'};  //Lettre pour identifier les cases avec leur tag ou id, aurait put etre simplemet des chiffes
 
@@ -80,7 +80,7 @@ public class BattleNaval extends Activity {
 
         updateText();
 
-        bcs = MainActivity.bltConnectionService;
+        bcs = StartGameBltActivity.bltConnectionService;
 
         final BroadcastReceiver brcReceiver = new BroadcastReceiver() {
         @Override
@@ -101,10 +101,10 @@ public class BattleNaval extends Activity {
 
     //met à jour les indications du nombres de navires à placer
     public void updateText(){
-        porteAvion.setText("Porte avion : "+nav.get(navire.PA)+"     --  Longueur 5");
-        croiseur.setText("Croiseur : "+nav.get(navire.C)+"     --  Longueur 3");
-        sousMarin.setText("Sous-marin : "+nav.get(navire.SM)+"     --  Longueur 4");
-        torpilleur.setText("Torpilleur : "+nav.get(navire.T)+"     --  Longueur 2");
+        porteAvion.setText(getString(R.string.len, getApplicationContext().getString(R.string.aircraft), nav.get(navire.PA), 5));
+        croiseur.setText(getString(R.string.len, getApplicationContext().getString(R.string.cruiser), nav.get(navire.C), 3));
+        sousMarin.setText(getString(R.string.len, getApplicationContext().getString(R.string.submarine), nav.get(navire.SM), 4));
+        torpilleur.setText(getString(R.string.len, getApplicationContext().getString(R.string.torpedo), nav.get(navire.T), 2));
     }
 
 
@@ -117,7 +117,7 @@ public class BattleNaval extends Activity {
             finish();
         }else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Vous n'avez pas placé tous les navires")
+            builder.setMessage(R.string.missingShip)
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             // User cancelled the dialog
@@ -138,14 +138,14 @@ public class BattleNaval extends Activity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Voulez vous vraiment abandonner ?")
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.abandon)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         bcs.write("abandon");
                         finish();
                     }
                 })
-                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                     }
@@ -367,7 +367,7 @@ public class BattleNaval extends Activity {
 
     public void abandonAdverse(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Votre adversaire est parti")
+        builder.setMessage(R.string.suddenEnd)
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

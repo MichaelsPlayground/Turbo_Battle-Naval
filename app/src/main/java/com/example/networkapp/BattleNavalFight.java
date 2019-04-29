@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,7 +53,7 @@ public class BattleNavalFight extends Activity {
 
         loadPlateau(navires);//rempli le plateau allié avec les bateaux positionnés
 
-        bcs = MainActivity.bltConnectionService;//permet la communication avec l'adversaire
+        bcs = StartGameBltActivity.bltConnectionService;//permet la communication avec l'adversaire
 
         //traite les messages reçu
         final BroadcastReceiver brcReceiver = new BroadcastReceiver() {
@@ -71,17 +73,21 @@ public class BattleNavalFight extends Activity {
                    }else if(msg.contains("lost")){
                        win();
                    }else if(msg.contains("miss")){
-                       info.setText("Dans l'eau !");
+                       info.setText(R.string.miss);
                    }else if(msg.contains("sinked")){
                         sinked(msg.substring(6,8));
                    }else if(msg.equals("start")){
                        yourTurn=true;
                        bcs.write("atoi");
-                       info.setText("A vous d'attaquer");
+                       info.setText(R.string.turn);
                    }else if (msg.contains("atoi")){
                        yourTurn=false;
                    }else if(msg.equals("restart")){
                        restart();
+                   }else if(msg.equals("suddenEnd")){
+                       Toast.makeText(getApplicationContext(), R.string.suddenEnd, Toast.LENGTH_LONG).show();
+                       Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                       startActivity(intent2);
                    }
                 }
             }
@@ -109,14 +115,14 @@ public class BattleNavalFight extends Activity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Voulez vous vraiment abandonner ?")
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.abandon)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         bcs.write("abandon");
                         finish();
                     }
                 })
-                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User cancelled the dialog
                     }
@@ -171,7 +177,7 @@ public class BattleNavalFight extends Activity {
             bcs.write("miss");
             findViewById(id).setBackgroundResource(R.color.colorDarkerSea);
         }
-        info.setText("A vous");
+        info.setText(R.string.turn);
         yourTurn=true;
     }
 
@@ -186,13 +192,13 @@ public class BattleNavalFight extends Activity {
         if (lost){
             bcs.write("lost");
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Bien tenté ! Voulez  vous prendre votre revanche ?")
-                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            builder.setMessage(R.string.revenge)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             bcs.write("restart");
                             restart=true;
                         }
-                    }).setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
                         }
@@ -205,9 +211,9 @@ public class BattleNavalFight extends Activity {
 
     //abandon de l'adversaire
     public void abandonAdverse(){
-        info.setText("Votre adversaire est parti");
+        info.setText(R.string.opponentLeft);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Votre adversaire est parti")
+        builder.setMessage(R.string.opponentLeft)
                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
@@ -221,7 +227,7 @@ public class BattleNavalFight extends Activity {
     public void touched(String place){
         int id = getResources().getIdentifier("Enem"+place,"id", getPackageName());
         findViewById(id).setBackgroundResource(R.color.colorRed);
-        info.setText("Touché !");
+        info.setText(R.string.hit);
     }
 
     //bateau adverse coulé
@@ -229,20 +235,20 @@ public class BattleNavalFight extends Activity {
         Log.d("noyé",place);
         int id = getResources().getIdentifier("Enem"+place,"id", getPackageName());
         findViewById(id).setBackgroundResource(R.color.colorRed);
-        info.setText("Touché coulé !!!");
+        info.setText(R.string.hitnsunk);
     }
 
     //partie gagné
     public void win(){
-        info.setText("Felicitation");
+        info.setText(R.string.congrat);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Bien joué ! Voulez vous essayer d'écraser votre adversaire de nouveaux ?!")
-                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.win)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         bcs.write("restart");
                         restart=true;
                     }
-                }).setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 finish();
             }
